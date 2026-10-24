@@ -1,0 +1,337 @@
+/* =========================================================
+   style.css — نادي البرمجة للمبتدئين
+   اقرأ الملف من الأعلى للأسفل: كل قسم يعلّمك فكرة جديدة.
+   الشكل العام لأي قاعدة:   selector { property: value; }
+   (المحدد يختار العنصر، والخاصية تغيّر شكله)
+   ========================================================= */
+
+
+/* ---------- 1) المتغيرات (Variables) ----------
+   نخزّن الألوان والقياسات مرة واحدة ونستخدمها بـ var(--الاسم).
+   لو أردت تغيير لون الموقع كله، غيّره هنا فقط. */
+:root {
+  --ink: #1b1f3b;      /* لون النص والترويسة */
+  --paper: #f4f6fb;    /* خلفية الصفحة */
+  --card: #ffffff;     /* خلفية البطاقات */
+  --violet: #5b3df5;   /* اللون الرئيسي */
+  --mint: #12b5a0;     /* لون ثانوي */
+  --muted: #5d6385;    /* نص خافت */
+  --line: #d9ddee;     /* الحدود */
+}
+
+
+/* ---------- 2) إعدادات أساسية ----------
+   box-sizing: border-box يجعل width يشمل الحشو (padding) والحدود،
+   وهذا يجنّبك مشاكل كثيرة في الحسابات. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;                       /* نلغي الهامش الافتراضي للمتصفح */
+  min-height: 100vh;               /* 100vh = ارتفاع الشاشة كاملة */
+  display: flex;                   /* Flexbox: ترتيب العناصر بمرونة */
+  flex-direction: column;          /* نرتّبها عمودياً: ترويسة، محتوى، تذييل */
+  font-family: system-ui, "Segoe UI", Tahoma, sans-serif;
+  line-height: 1.7;                /* ارتفاع السطر: يريح القراءة */
+  color: var(--ink);
+  background-color: var(--paper);
+  /* نقاط صغيرة تشبه ورق الدفتر، مرسومة بتدرج لوني بدون صور */
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+
+/* ---------- 3) الترويسة (Header) ----------
+   نجعلها تشبه نافذة محرر الأكواد. */
+header {
+  background: var(--ink);
+  color: #fff;
+  /* max() يختار الأكبر: يبقي المحتوى في الوسط على الشاشات الكبيرة */
+  padding: 0 max(1.5rem, calc((100% - 760px) / 2)) 1.25rem;
+}
+
+/* ::before = عنصر وهمي ننشئه بالـ CSS قبل محتوى الترويسة.
+   نرسم دائرة واحدة، ثم box-shadow يكرّرها فتصبح ثلاث نقاط. */
+header::before {
+  content: "";                     /* لازم لكي يظهر العنصر الوهمي */
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: 1rem 0;
+  border-radius: 50%;              /* 50% = دائرة كاملة */
+  background: #ff5f57;
+  box-shadow: 20px 0 #febc2e, 40px 0 #28c840;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  /* clamp(أصغر, مرن, أكبر): حجم خط يتكيف مع عرض الشاشة */
+  font-size: clamp(1.4rem, 4.5vw, 2.1rem);
+  line-height: 1.25;
+}
+
+h1::before {
+  content: "</> ";
+  color: var(--mint);
+}
+
+
+/* ---------- 4) شريط التنقل (Nav) ---------- */
+nav {
+  display: flex;
+  flex-wrap: wrap;                 /* إذا ضاقت الشاشة ينزل الرابط لسطر جديد */
+  gap: 0.5rem;                     /* مسافة بين الروابط */
+}
+
+nav a {
+  padding: 0.5rem 1rem;
+  color: #c9ceee;
+  text-decoration: none;           /* نزيل الخط السفلي */
+  border-radius: 8px;
+  transition: background-color 0.15s, color 0.15s;  /* تغيّر ناعم */
+}
+
+/* :hover = عند مرور الماوس */
+nav a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* [attr="value"] = اختيار حسب خاصية في HTML.
+   الصفحة الحالية عليها aria-current="page" */
+nav a[aria-current="page"] {
+  background: var(--violet);
+  color: #fff;
+}
+
+/* :focus-visible = يظهر عند التنقل بلوحة المفاتيح (Tab) */
+nav a:focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 2px;
+}
+
+
+/* ---------- 5) المحتوى الرئيسي ---------- */
+main {
+  flex: 1;                         /* يتمدد ليدفع التذييل لأسفل الصفحة */
+  width: 100%;
+  max-width: 760px;                /* حد أقصى للعرض = قراءة أسهل */
+  margin: 0 auto;                  /* auto على الجانبين = توسيط أفقي */
+  padding: 2.5rem 1.5rem;
+}
+
+main section + section {
+  margin-top: 2.5rem;              /* + = القسم الذي يأتي مباشرة بعد قسم */
+}
+
+h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+
+/* ---------- 6) الصفحة الرئيسية ----------هنا نستخدم class (يبدأ بنقطة) لنستهدف عناصر محددة. */
+.intro {
+  padding-left: 1.25rem;
+  border-left: 4px solid var(--violet);
+}
+
+/* CSS Grid: شبكة أعمدة. auto-fit + minmax = عدد الأعمدة يتغير حسب العرض */
+.activities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.activities h2 {
+  grid-column: 1 / -1;             /* العنوان يمتد على كل الأعمدة */
+  margin-bottom: 0;
+}
+
+.activities article {
+  padding: 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--violet);
+  border-radius: 12px;
+}
+
+.activities article p {
+  margin-bottom: 0;
+}
+
+/* :nth-of-type(2) = ثاني عنصر article، نغيّر لون حدّه */
+.activities article:nth-of-type(2) {
+  border-top-color: var(--mint);
+}
+
+
+/* ---------- 7) صفحة التسجيل (النموذج) ---------- */
+.form-card {
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  /* box-shadow: إزاحة أفقية، إزاحة عمودية، تمويه، انتشار، لون */
+  box-shadow: 0 12px 32px -16px rgba(27, 31, 59, 0.3);
+}
+
+form p {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+/* :not() = استثناء. نختار كل الحقول ما عدا الراديو وزر الإرسال */
+input:not([type="radio"]):not([type="submit"]),
+select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font: inherit;                   /* يأخذ نفس خط الصفحة */
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+/* :focus = عندما تكتب داخل الحقل */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--violet);
+  box-shadow: 0 0 0 4px rgba(91, 61, 245, 0.18);   /* هالة حول الحقل */
+}
+
+/* :user-invalid = بيانات خاطئة بعد أن يتفاعل المستخدم مع الحقل */
+input:user-invalid {
+  border-color: #e5484d;
+}
+
+/* مجموعة المستوى الدراسي: أزرار على شكل حبوب بدل دوائر الراديو */
+fieldset {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* نخفي دائرة الراديو الأصلية (لكنها تبقى تعمل بلوحة المفاتيح) */
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+fieldset label {
+  display: inline-block;
+  margin: 0;
+  padding: 0.45rem 1rem;
+  font-weight: 500;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;            /* رقم كبير = أطراف دائرية بالكامل */
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+fieldset label:hover {
+  border-color: var(--violet);
+}
+
+/* + = العنصر المجاور مباشرة. الراديو يأتي قبل الـ label في HTML،
+   فنستطيع تلوين الـ label عندما يكون الراديو مختاراً */
+input[type="radio"]:checked + label {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: #fff;
+}
+
+input[type="radio"]:focus-visible + label {
+  outline: 3px solid rgba(91, 61, 245, 0.4);
+  outline-offset: 2px;
+}
+
+input[type="submit"] {
+  padding: 0.8rem 1.75rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--violet);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+input[type="submit"]:hover {
+  background: #4528d8;
+}
+
+input[type="submit"]:active {
+  transform: translateY(1px);      /* ضغطة خفيفة عند النقر */
+}
+
+input[type="submit"]:focus-visible {
+  outline: 3px solid rgba(91, 61, 245, 0.4);
+  outline-offset: 2px;
+}
+
+
+/* ---------- 8) التذييل ---------- */
+footer {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+}
+
+footer p {
+  margin: 0;
+}
+
+
+/* ---------- 9) التجاوب مع الشاشات (Media Queries) ----------
+   هذه القواعد تعمل فقط عندما تتحقق الشروط. */
+@media (max-width: 520px) {
+  input[type="submit"] {
+    width: 100%;                   /* زر بعرض الشاشة على الجوال */
+  }
+}/* احترام من يفضّلون تقليل الحركة في أجهزتهم */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
