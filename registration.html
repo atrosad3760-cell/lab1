@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Registeration</title>
+</head>
+<header>
+    <h1>Beginners Programming Club</h1>
+    <nav>
+        <a href="index.html">Home Page</a>
+        <a href="registration.html">Create New Account</a>
+    </nav>
+</header>
+<body>
+    <main>
+        <section>
+            <h2>New Member Register Form</h2>
+            <p>Please enter your basic information to contact you:</p>
+            <form>
+                <p>
+                    <label>Student Full Name:</label>
+                    <input type="text" name="fullname">
+                </p>
+                <p>
+                    <label>Email Address:</label>
+                    <input type="email" name="email">
+                </p>
+                <p>
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" required>
+                </p>
+                <p>
+                    <label>
+                        Phone Nunber
+                    </label>
+                    <input type="tel" id="phone-number " name="phone">
+                </p>
+                <p>
+                    <label for="academic-major">Academic Major</label>
+                    <select id="academic-major" name="major">
+                        <option value="it">Information Technology (IT)</option>
+                        <option value="cs">Computer Scinece (CS)</option>
+                        <option value="is">Information System (IS)</option>
+                        <option value="other">Other</option>
+                    </select>
+                </p>
+                <p>
+                <fieldset>
+                    <legend>Academic Level:</legend>
+                    <input type="radio" id="lvl1" name="level" value="level1"><label for="lvl1">level1</label>
+                    <input type="radio" id="lvl2" name="level" value="level2"><label for="lvl2">level2</label>
+                    <input type="radio" id="lvl3" name="level" value="level3"><label for="lvl3">level3</label>
+                    <input type="radio" id="lvl4" name="level" value="level4"><label for="lvl4">level4</label>
+                    <input type="radio" id="lvl5" name="level" value="level5"><label for="lvl5">level5</label>
+                </fieldset>
+                </p>
+                <p>
+                    <input type="submit" value="submit Data">
+                </p>
+            </form>
+        </section>
+    </main>
+</body>
+<footer>
+    <p>All rights reserved & copy; 2026 - Programming Club</p>
+</footer>
+</html>
