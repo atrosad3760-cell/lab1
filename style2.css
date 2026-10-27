@@ -1,54 +1,31 @@
+body{
+margin: 0;
+min-height: 100vh;
+display: flex;
+flex-direction: column ;
+font-family: system-ui ,'Segoe UI', Tahoma, sans-serif;
+line-height: 1.7;
+color: var(--ink);
+background-color: var(--paper);
+background-size: 22px;
+}
 header{
-    background-color:#050505;
-    color: #ffffff;
-    padding: 0 5px;
-    text-align: center;
+    background-color: var(--ink);
+    color: #fff;
+    padding: 0 max(1.5rem,calc((100% - 760px)/2)) 1.25rem;
 }
-
-input [type="text"],
-input [type="email"],
-input [type="password"],
-input [type="tel"],
-select{
-    width: 250px;
-    padding: 8px;
-    border: ipx solid#ccc;
-    border-radius :4px;
+header::before{
+content: "";
+display: block;
+width: 12px;
+height: 12px;
+margin: 1rem 0;
+border-radius: 50%;
+background: #ff5f57;
+box-shadow: 20px 0 #febc2e,40px 0 #28c840;
 }
-
-body {
-font-family: 'Times New Roman', Times, serif;
-background-color: #090c05cb;
-color: rgb(0, 0, 0);
-
-margin: 20px 10px 5px;
-}
-nav a{
-color: #ffffff;
-text-decoration: name;
-margin: 0 15px;
-font-weight: bold;
-}
-nav a:hover{
-    color: #cecdcb;
-}
-
-section{
-
-    background-color: #ffffff;
-    padding: 20px;
-    margin-top: 15px;
-    border: 1px solid #dddddd;
-}
-article{
-
-    background-color: #f9f9f9;
-    border-left:4px solid #003366;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-}
-footer
-{
-    
-color: rgb(255, 255, 255);
+h1{
+margin: 0 0 1rem;
+font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+line-height: 1.25;
 }
